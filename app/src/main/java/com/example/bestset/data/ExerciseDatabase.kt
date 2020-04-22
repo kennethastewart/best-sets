@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase
 @Database(entities = [ExerciseContent::class], version = 1, exportSchema = false)
 abstract class ExerciseDatabase : RoomDatabase(){
 
-    abstract val exerciseDatabaseDao : ExerciseDatabaseDao
+    abstract val exerciseDatabaseDao : ExerciseDao
 
     companion object{
 

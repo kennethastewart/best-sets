@@ -12,18 +12,18 @@ data class ExerciseContent(
     @PrimaryKey(autoGenerate = true)
     var setId:Long = 0L,
 
-    @ColumnInfo(name = "user_id")
-    var userId:String,
+    @ColumnInfo(name = "user_name")
+    var username:String,
 
-    val exercise : String,
+    var exercise : String,
 
     @ColumnInfo(name = "exercise_volume")
     var exerciseVol: Long,
 
-    @ColumnInfo(name = "exercise_data")
-    var exerciseData: Entry,
-
-    var date: Date,
+//    @ColumnInfo(name = "exercise_data")
+//    var exerciseData: Entry,
+//
+//    var date: Date,
 
     var pr: Boolean
 )

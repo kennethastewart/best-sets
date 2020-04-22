@@ -6,7 +6,7 @@ import androidx.room.Query
 import androidx.room.Update
 
 @Dao
-interface  ExerciseDatabaseDao{
+interface  ExerciseDao{
 
     @Insert
     fun insert(exercise : ExerciseContent)
@@ -16,4 +16,7 @@ interface  ExerciseDatabaseDao{
 
     @Query("DELETE FROM exercise_records_table")
     fun clear()
+
+    @Query("SELECT * FROM exercise_records_table WHERE user_name = :username ")
+    fun getEntryByUsername(username: String) : ExerciseContent
 }
