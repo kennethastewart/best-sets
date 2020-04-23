@@ -3,6 +3,7 @@
     <color name="colorPrimary">#5D6566</color>
     <color name="primaryLightColor">#a4a4a4</color>
     <color name="colorPrimaryDark">#5D6566</color>
+    <color name="colorPrimaryExtraDark">#FF424242</color>
     <color name="colorAccent">#F9AA16</color>
     <color name="colorAccentLight">#FDCF5C</color>
 
