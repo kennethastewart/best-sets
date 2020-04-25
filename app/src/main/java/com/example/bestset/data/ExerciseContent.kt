@@ -3,8 +3,6 @@ package com.example.bestset.data
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.github.mikephil.charting.data.Entry
-import java.util.*
 
 @Entity(tableName = "exercise_records_table")
 data class ExerciseContent(
@@ -13,17 +11,18 @@ data class ExerciseContent(
     var setId:Long = 0L,
 
     @ColumnInfo(name = "user_name")
-    var username:String,
+    var username:String = "Default",
 
-    var exercise : String,
+    var exercise : String = "Default",
 
     @ColumnInfo(name = "exercise_volume")
-    var exerciseVol: Long,
+    var exerciseVol: Long = 0L,
 
 //    @ColumnInfo(name = "exercise_data")
 //    var exerciseData: Entry,
 //
 //    var date: Date,
 
-    var pr: Boolean
+    @ColumnInfo
+    var pr: Boolean = false
 )

@@ -13,4 +13,6 @@
 
     <string name="home_second">Home Second</string>
     <string name="exercises">Exercises</string>
+    <string name="add_new_exercise_btn">Add New Exercise</string>
+    <string name="add_an_exercise_hint">Add an Exercise</string>
 </resources>

@@ -25,8 +25,9 @@ class HomeFragment : Fragment() {
                 ViewModelProviders.of(this).get(HomeViewModel::class.java)
         val binding = FragmentHomeBinding.inflate(inflater)
         binding.fabplus.setOnClickListener { view ->
-            Snackbar.make(view, "Add New Item", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+            this.findNavController().navigate(HomeFragmentDirections.actionNavHomeToAddExerciseFragment())
+//            Snackbar.make(view, "Add New Item", Snackbar.LENGTH_LONG)
+//                .setAction("Action", null).show()
         }
         val adapter = HomeExerciseAdapter(HomeExerciseAdapter.OnClickListener{
             this.findNavController().navigate(HomeFragmentDirections.actionNavHomeToExerciseFragment())
