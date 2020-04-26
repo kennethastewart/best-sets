@@ -11,16 +11,27 @@ import com.example.bestset.R
 import com.example.bestset.data.ExerciseContent
 
 class HomeExerciseAdapter(val clickListener : OnClickListener) : RecyclerView.Adapter<HomeExerciseAdapter.ExerciseViewHolder>() {
+    private var exerciseList : List<String>? = null
 
     override fun onCreateViewHolder( parent: ViewGroup, viewType: Int): HomeExerciseAdapter.ExerciseViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.exercise_item, parent, false)
         return ExerciseViewHolder(view)
     }
 
-    override fun getItemCount() = 9
+    override fun getItemCount(): Int {
+        return if (exerciseList == null){ 0 }else exerciseList!!.size
+    }
+
+    var exercises : List<String>?
+        get() = exerciseList
+        set(newExercises){
+            exerciseList = newExercises
+            notifyDataSetChanged()
+        }
 
     override fun onBindViewHolder(holder: HomeExerciseAdapter.ExerciseViewHolder, position: Int) {
-        holder.exerciseName.text = "New Exercise"
+        val exercise = exerciseList!![position]
+        holder.exerciseName.text = exercise
         holder.itemView.setOnClickListener{
             clickListener.onClick()
         }
