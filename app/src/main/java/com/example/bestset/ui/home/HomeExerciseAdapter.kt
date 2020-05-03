@@ -33,7 +33,7 @@ class HomeExerciseAdapter(val clickListener : OnClickListener) : RecyclerView.Ad
         val exercise = exerciseList!![position]
         holder.exerciseName.text = exercise
         holder.itemView.setOnClickListener{
-            clickListener.onClick()
+            clickListener.onClick(exercise)
         }
     }
 
@@ -45,8 +45,8 @@ class HomeExerciseAdapter(val clickListener : OnClickListener) : RecyclerView.Ad
         }
     }
 
-    class OnClickListener(val clickListener: () -> Unit) {
-        fun onClick() = clickListener()
+    class OnClickListener(val clickListener: (exerciseName : String) -> Unit) {
+        fun onClick(exerciseName: String) = clickListener(exerciseName)
     }
 
 

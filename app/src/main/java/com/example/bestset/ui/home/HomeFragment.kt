@@ -41,7 +41,7 @@ class HomeFragment : Fragment() {
 //                .setAction("Action", null).show()
         }
         val adapter = HomeExerciseAdapter(HomeExerciseAdapter.OnClickListener{
-            this.findNavController().navigate(HomeFragmentDirections.actionNavHomeToExerciseFragment())
+            this.findNavController().navigate(HomeFragmentDirections.actionNavHomeToExerciseFragment(it))
         })
         binding.setLifecycleOwner(this)
 //        homeViewModel.allExerciseData.observe(this, Observer {
