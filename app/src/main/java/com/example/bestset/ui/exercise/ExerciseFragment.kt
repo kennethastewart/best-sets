@@ -1,11 +1,14 @@
 package com.example.bestset.ui.exercise
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.example.bestset.R
 import com.example.bestset.data.ExerciseDatabase
 import com.example.bestset.databinding.FragmentExerciseBinding
 import com.github.mikephil.charting.data.Entry
@@ -13,21 +16,44 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 
 
+
+
 class ExerciseFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
+
         val binding = FragmentExerciseBinding.inflate(inflater)
         val arguments = ExerciseFragmentArgs.fromBundle(arguments!!)
         val application = requireNotNull(this.activity).application
         val datasource = ExerciseDatabase.getInstance(application)
 
         val viewModelFactory = ExerciseViewModelFactory(datasource ,arguments.exerciseName)
-        binding.viewModel = ViewModelProviders.of(this, viewModelFactory).get(ExerciseViewModel::class.java)
-        setupLineChart(binding, arguments)
+        val viewModel = ViewModelProviders.of(this, viewModelFactory).get(ExerciseViewModel::class.java)
+        binding.viewModel = viewModel
+        val adapter = ExerciseAdapter()
+        binding.setsRecycler.adapter = adapter
+//        setupLineChart(binding, arguments)
+        binding.addSetButton.setOnClickListener(View.OnClickListener {
+            openAddSetDialog(inflater, arguments)
+        })
+        viewModel.exerciseData.observe(this, Observer {
+            it?.let {
+                adapter.sets = it
+            }
+        })
 
 
         return binding.root
+    }
+
+    private fun openAddSetDialog( inflater: LayoutInflater,  arguments: ExerciseFragmentArgs) {
+        val builder: AlertDialog.Builder? = activity?.let {
+            AlertDialog.Builder(it)
+        }
+        builder?.setView(inflater.inflate(R.layout.set_dialog, null))
+            ?.setTitle(arguments.exerciseName)?.setMessage("Add a new session here:")
+            ?.setPositiveButton("Add", null)?.create()?.show()
     }
 
     private fun setupLineChart(
