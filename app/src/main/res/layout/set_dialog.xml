@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--<layout-->
+<!--    xmlns:android="http://schemas.android.com/apk/res/android">-->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--    <data>-->
+<!--        <variable-->
+<!--            name="dialog"-->
+<!--            type="com.example.bestset.ui.exercise.ExerciseViewModel" />-->
+<!--    </data>-->
+
+
+    <LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/sets_edit_text_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/medium_spacing"
@@ -13,6 +24,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/sets_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             />
@@ -21,6 +33,7 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/reps_edit_text_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/medium_spacing"
@@ -28,6 +41,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/reps_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             />
@@ -35,3 +49,5 @@
     </com.google.android.material.textfield.TextInputLayout>
 
 </LinearLayout>
+
+<!--</layout>-->

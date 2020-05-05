@@ -31,14 +31,17 @@ class ExerciseAdapter() : RecyclerView.Adapter<ExerciseAdapter.SetViewHolder>() 
     override fun onBindViewHolder(holder: ExerciseAdapter.SetViewHolder, position: Int) {
         val exerciseSet = setData!![position]
         holder.exerciseName.text = exerciseSet.exercise
+        holder.setVolume.text = exerciseSet.exerciseVol.toString()
     }
 
 
     class SetViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         var exerciseName : TextView
+        var setVolume : TextView
 
         init {
             exerciseName = itemView.findViewById(R.id.exercise_set_name)
+            setVolume = itemView.findViewById(R.id.exercise_set_volume)
         }
     }
 }

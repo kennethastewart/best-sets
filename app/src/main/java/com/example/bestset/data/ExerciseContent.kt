@@ -17,7 +17,7 @@ data class ExerciseContent(
     var exercise : String = "Default",
 
     @ColumnInfo(name = "exercise_volume")
-    var exerciseVol: Long = 0L,
+    var exerciseVol: Int = 0,
 
     @ColumnInfo(name = "exercise_data")
     var exerciseData: Long = 0,
