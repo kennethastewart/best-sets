@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.example.bestset.R
 import com.example.bestset.data.ExerciseContent
 import com.example.bestset.data.ExerciseDatabase
@@ -26,8 +27,6 @@ class ExerciseFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-
-
 
         val binding = FragmentExerciseBinding.inflate(inflater)
         val arguments = ExerciseFragmentArgs.fromBundle(arguments!!)
@@ -48,6 +47,13 @@ class ExerciseFragment : Fragment() {
             it?.let {
                 adapter.sets = it
                 setupLineChart(binding, arguments, it)
+            }
+        })
+
+        viewModel.navigateHomeTrigger.observe(this, Observer {
+            if(it == true){
+                this.findNavController().navigate(ExerciseFragmentDirections.actionExerciseFragmentToNavHome())
+                viewModel.navigatingDone()
             }
         })
 

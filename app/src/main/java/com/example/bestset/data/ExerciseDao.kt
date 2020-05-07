@@ -18,6 +18,9 @@ interface  ExerciseDao{
     @Query("DELETE FROM exercise_records_table")
     fun clear()
 
+    @Query("DELETE FROM exercise_records_table WHERE exercise = :exerciseName")
+    fun deleteAllExcerisesWithName(exerciseName : String)
+
     @Query("SELECT * FROM exercise_records_table")
     fun getAllExerciseData() : LiveData<List<ExerciseContent>>
 

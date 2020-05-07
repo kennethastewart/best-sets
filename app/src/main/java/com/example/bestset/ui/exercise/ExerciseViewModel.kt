@@ -21,6 +21,11 @@ class ExerciseViewModel(val datasource: ExerciseDatabase, val exerciseName : Str
     val closeDialogCheck: LiveData<Boolean>
         get() = _closeDialogCheck
 
+    val _navigateHomeTrigger = MutableLiveData<Boolean>()
+
+    val navigateHomeTrigger: LiveData<Boolean>
+        get() = _navigateHomeTrigger
+
     fun loadExercisesbyGroup(){
         uiScope.launch {
             exerciseData.value = getGroupExercises()
@@ -50,11 +55,30 @@ class ExerciseViewModel(val datasource: ExerciseDatabase, val exerciseName : Str
         }
     }
 
+    fun deleteExerciseAndTriggerNavigateHome(){
+        removeSet()
+        _navigateHomeTrigger.value = true
+    }
+
     fun dialogClosedSuccessfully(){
         _closeDialogCheck.value = false
     }
 
+    fun removeSet(){
+        uiScope.launch {
+            remove()
+        }
+    }
 
+    private suspend fun remove(){
+        return withContext(Dispatchers.IO){
+            datasource.exerciseDatabaseDao.deleteAllExcerisesWithName(exerciseName)
+        }
+    }
+
+    fun navigatingDone(){
+        _navigateHomeTrigger.value = false
+    }
 
     init {
         loadExercisesbyGroup()
