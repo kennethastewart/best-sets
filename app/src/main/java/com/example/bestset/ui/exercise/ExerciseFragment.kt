@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -50,6 +51,9 @@ class ExerciseFragment : Fragment() {
             }
         })
 
+
+
+
         return binding.root
     }
 
@@ -75,10 +79,6 @@ class ExerciseFragment : Fragment() {
         sets = dialog!!.findViewById<TextInputEditText>(R.id.sets_edit_text)
         reps = dialog!!.findViewById<TextInputEditText>(R.id.reps_edit_text)
 
-
-
-
-
     }
 
     private fun setupLineChart(
@@ -93,13 +93,6 @@ class ExerciseFragment : Fragment() {
             entries.add(Entry(counter, setVol))
             counter++
         }
-//        entries.add(Entry(1f, 2f))
-//        entries.add(Entry(2f, 3f))
-//        entries.add(Entry(3f, 4f))
-//        entries.add(Entry(4f, 3f))
-//        entries.add(Entry(5f, 3f))
-//        entries.add(Entry(6f, 3f))
-//        entries.add(Entry(7f, 1f))
         val dataSet = LineDataSet(entries, "Test")
         val lineData = LineData(dataSet)
         binding.chart.description.text = arguments.exerciseName
@@ -118,6 +111,7 @@ class ExerciseFragment : Fragment() {
         viewModel.volumeToBeAdded.value = volume
         viewModel.addSet()
     }
+
 
 
 

@@ -1,5 +1,6 @@
 package com.example.bestset.ui.exercise
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.bestset.data.ExerciseContent
@@ -13,8 +14,12 @@ class ExerciseViewModel(val datasource: ExerciseDatabase, val exerciseName : Str
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     var exerciseData = MutableLiveData<List<ExerciseContent>?>()
-
     var volumeToBeAdded = MutableLiveData<Int>()
+
+    var _closeDialogCheck = MutableLiveData<Boolean>()
+
+    val closeDialogCheck: LiveData<Boolean>
+        get() = _closeDialogCheck
 
     fun loadExercisesbyGroup(){
         uiScope.launch {
@@ -43,6 +48,10 @@ class ExerciseViewModel(val datasource: ExerciseDatabase, val exerciseName : Str
         return withContext(Dispatchers.IO){
             datasource.exerciseDatabaseDao.insert(newExercise)
         }
+    }
+
+    fun dialogClosedSuccessfully(){
+        _closeDialogCheck.value = false
     }
 
 
