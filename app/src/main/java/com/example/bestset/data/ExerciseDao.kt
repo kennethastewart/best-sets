@@ -28,5 +28,5 @@ interface  ExerciseDao{
     fun getEntryByUsername(username: String) : ExerciseContent
 
     @Query("SELECT * FROM exercise_records_table WHERE exercise = :exerciseName")
-    fun getExerciseGroup(exerciseName : String) : List<ExerciseContent>
+    fun getExerciseGroup(exerciseName : String) : LiveData<List<ExerciseContent>>
 }
