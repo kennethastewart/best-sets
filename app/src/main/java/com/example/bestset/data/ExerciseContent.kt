@@ -4,12 +4,10 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.sql.Blob
+import java.util.*
 
 @Entity(tableName = "exercise_records_table")
 data class ExerciseContent(
-
-    @PrimaryKey(autoGenerate = true)
-    var setId:Long = 0L,
 
     @ColumnInfo(name = "user_name")
     var username:String = "Default",
@@ -21,9 +19,12 @@ data class ExerciseContent(
 
     @ColumnInfo(name = "exercise_data")
     var exerciseData: Long = 0,
-//
-    var date: Long = System.currentTimeMillis(),
 
     @ColumnInfo
-    var pr: Boolean = false
+    var pr: Boolean = false,
+
+    var date: Long = System.currentTimeMillis(),
+
+    @PrimaryKey
+    var setId:String = UUID.randomUUID().toString()
 )

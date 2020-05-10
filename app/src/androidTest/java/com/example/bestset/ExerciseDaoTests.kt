@@ -1,57 +1,73 @@
 package com.example.bestset
 
 import android.content.Context
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
-import androidx.test.espresso.matcher.ViewMatchers.assertThat
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry
 import com.example.bestset.data.ExerciseContent
-import com.example.bestset.data.ExerciseDao
 import com.example.bestset.data.ExerciseDatabase
-import com.github.mikephil.charting.data.Entry
-import org.hamcrest.EasyMock2Matchers.equalTo
-import org.junit.After
-import org.junit.Assert
-import org.junit.Before
-import org.junit.Test
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.*
+import kotlinx.coroutines.test.runBlockingTest
+import org.junit.*
 import org.junit.runner.RunWith
-import java.io.IOException
-import java.util.*
 
 
 @RunWith(AndroidJUnit4::class)
 class ExerciseDaoTests{
     private lateinit var database: ExerciseDatabase
-    private lateinit var exerciseDao: ExerciseDao
+
+    @get:Rule
+    var instantExecutorRule = InstantTaskExecutorRule()
 
     @Before
     fun initDb(){
         val context = ApplicationProvider.getApplicationContext<Context>()
         database = Room.inMemoryDatabaseBuilder( context, ExerciseDatabase::class.java ).build()
-        exerciseDao = database.exerciseDatabaseDao
     }
 
     @After
-    @Throws(IOException::class)
     fun closeDb(){
         database.close()
     }
 
     @Test
-    fun useAppContext() {
-        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        Assert.assertEquals("com.example.bestset", appContext.packageName)
+    fun writeOneUserAndReadInList() {
+        val entry = ExerciseContent("Dave55","push up", 10, 20)
+        database.exerciseDatabaseDao.insert(entry)
+        val byName = database.exerciseDatabaseDao.getEntryByUsername("Dave55")
+        Assert.assertEquals(byName.exercise, "push up")
     }
 
     @Test
-    @Throws(Exception::class)
-    fun writeUserAndReadInList() {
-        val entry = ExerciseContent(1,"Dave55","push up", 10, false)
-        exerciseDao.insert(entry)
-        val byName = exerciseDao.getEntryByUsername("Dave55")
-        Assert.assertEquals(byName.exercise, "push up")
+    fun itemCanBeUpdated() = runBlockingTest{
+        val exerciseEntry = ExerciseContent("Jimmy", "sit ups", 20, 10, true )
+        database.exerciseDatabaseDao.insert(exerciseEntry)
+        exerciseEntry.exerciseVol = 30
+        database.exerciseDatabaseDao.update(exerciseEntry)
+
+        val loadedEntry = database.exerciseDatabaseDao.getEntryById(exerciseEntry.setId)
+
+        assertThat(loadedEntry.exercise, `is`(exerciseEntry.exercise))
+        assertThat(loadedEntry.exerciseVol, `is`(30))
+        assertThat(loadedEntry.exerciseVol, `is`(not(20)))
     }
+
+    @Test
+    fun itemCanBeDeleted() = runBlockingTest {
+        val entry1 = ExerciseContent("Tam", "Burpees", 100, 10, true)
+        database.exerciseDatabaseDao.insert(entry1)
+        var loadedData = database.exerciseDatabaseDao.getEntryById(entry1.setId)
+        assertThat(loadedData.setId, `is`(entry1.setId))
+        database.exerciseDatabaseDao.deleteExerciseById(entry1.setId)
+        loadedData = database.exerciseDatabaseDao.getEntryById(entry1.setId)
+        Assert.assertEquals(loadedData, null)
+
+    }
+
+
+
 }
 
 

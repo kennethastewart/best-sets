@@ -29,7 +29,7 @@ class ExerciseFragment : Fragment() {
     ): View? {
 
         val binding = FragmentExerciseBinding.inflate(inflater)
-        val arguments = ExerciseFragmentArgs.fromBundle(arguments!!)
+        val arguments = ExerciseFragmentArgs.fromBundle(requireArguments())
         val application = requireNotNull(this.activity).application
         val datasource = ExerciseDatabase.getInstance(application)
 
@@ -40,12 +40,13 @@ class ExerciseFragment : Fragment() {
         val adapter = ExerciseAdapter()
         binding.setsRecycler.adapter = adapter
 
+
         binding.addSetButton.setOnClickListener(View.OnClickListener {
             openAddSetDialog(inflater, arguments, viewModel)
         })
-        viewModel.exerciseData.observe(this, Observer {
+        viewModel.exerciseData.observe(viewLifecycleOwner, Observer {
             it?.let {
-                adapter.sets = it
+                adapter.sets = it.reversed()
                 setupLineChart(binding, arguments, it)
             }
         })
