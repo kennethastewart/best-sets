@@ -1,9 +1,7 @@
 package com.example.bestset.ui.home
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -12,10 +10,12 @@ import androidx.navigation.fragment.findNavController
 import com.example.bestset.R
 import com.example.bestset.data.ExerciseDatabase
 import com.example.bestset.databinding.FragmentHomeBinding
+import com.firebase.ui.auth.AuthUI
 
 class HomeFragment : Fragment() {
 
     private lateinit var homeViewModel: HomeViewModel
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? ): View? {
 
@@ -45,4 +45,6 @@ class HomeFragment : Fragment() {
         binding.exercisesRecycleview.adapter = adapter
         return binding.root
     }
+
+
 }

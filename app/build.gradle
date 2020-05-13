@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
-//apply plugin: 'androidx.navigation.safeargs'
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
@@ -72,6 +71,7 @@ dependencies {
 //    third-party
     implementation 'com.jakewharton.timber:timber:4.7.1'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    implementation 'com.firebaseui:firebase-ui-auth:5.0.0'
 
     implementation "androidx.test:core:$androidXTestCoreVersion"
     testImplementation 'junit:junit:4.12'
@@ -81,7 +81,6 @@ dependencies {
     androidTestImplementation "androidx.arch.core:core-testing:$archTestingVersion"
     androidTestImplementation "androidx.test.ext:junit:$androidXTestExtKotlinRunnerVersion"
     androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
-
-
-
 }
+
+apply plugin: 'com.google.gms.google-services'
