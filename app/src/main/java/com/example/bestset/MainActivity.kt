@@ -36,7 +36,6 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         Timber.plant(Timber.DebugTree())
 
-
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
@@ -74,8 +73,6 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
         when(id){
@@ -103,9 +100,6 @@ class MainActivity : AppCompatActivity() {
     private fun signOut(){
         AuthUI.getInstance().signOut(applicationContext)
     }
-
-
-
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)

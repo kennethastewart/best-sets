@@ -71,7 +71,7 @@ class ExerciseViewModel(val datasource: ExerciseDatabase, val exerciseName : Str
      return pr
     }
 
-    fun getPRStirng() : String{
+    fun getPRString() : String{
         val pr = getPR()
         return "Personal Best: $pr reps"
     }

@@ -1,14 +1,13 @@
 package com.example.bestset.ui.exercise
 
 import android.app.AlertDialog
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.example.bestset.R
@@ -18,6 +17,7 @@ import com.example.bestset.databinding.FragmentExerciseBinding
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 
 
@@ -40,8 +40,6 @@ class ExerciseFragment : Fragment() {
 
         val adapter = ExerciseAdapter()
         binding.setsRecycler.adapter = adapter
-
-
         binding.addSetButton.setOnClickListener(View.OnClickListener {
             openAddSetDialog(inflater, arguments, viewModel)
         })
@@ -49,11 +47,9 @@ class ExerciseFragment : Fragment() {
             it?.let {
                 adapter.sets = it.reversed()
                 setupLineChart(binding, arguments, it)
-                binding.prText.text = viewModel.getPRStirng()
+                binding.prText.text = viewModel.getPRString()
             }
         })
-
-
 
         viewModel.navigateHomeTrigger.observe(viewLifecycleOwner, Observer {
             if(it == true){
@@ -113,11 +109,15 @@ class ExerciseFragment : Fragment() {
     fun recordExerciseResults(
         viewModel: ExerciseViewModel
     ) {
-        val setInt = sets?.editableText.toString().toInt()
-        val repInt = reps?.editableText.toString().toInt()
-        val volume =  repInt*setInt
-        viewModel.volumeToBeAdded.value = volume
-        viewModel.addSet()
+        if(sets?.editableText.toString() != "" && reps?.editableText.toString() != "") {
+            val setInt = sets?.editableText.toString().toInt()
+            val repInt = reps?.editableText.toString().toInt()
+            val volume =  repInt*setInt
+            viewModel.volumeToBeAdded.value = volume
+            viewModel.addSet()
+        }else{
+            Snackbar.make(requireView(), "Set not added: Values were blank", Snackbar.LENGTH_LONG).setBackgroundTint(Color.RED).show()
+        }
     }
 }
 
