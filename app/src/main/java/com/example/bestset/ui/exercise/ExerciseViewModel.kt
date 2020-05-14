@@ -2,6 +2,7 @@ package com.example.bestset.ui.exercise
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.example.bestset.data.ExerciseContent
 import com.example.bestset.data.ExerciseDatabase
@@ -60,6 +61,19 @@ class ExerciseViewModel(val datasource: ExerciseDatabase, val exerciseName : Str
 
     init {
         exerciseData = datasource.exerciseDatabaseDao.getExerciseGroup(exerciseName)
+    }
+
+    fun getPR() : Int{
+        var pr = 0
+        exerciseData.value?.forEach {
+            if(it.exerciseVol > pr){ pr = it.exerciseVol }
+        }
+     return pr
+    }
+
+    fun getPRStirng() : String{
+        val pr = getPR()
+        return "Personal Best: $pr reps"
     }
 
 
