@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -26,7 +28,11 @@ class AddExerciseFragment : Fragment() {
         binding.viewmodel = addExerciseViewModel
         binding.setLifecycleOwner(this)
 
-        addExerciseViewModel.navigateToHomeCheck.observe(this, Observer {
+        val items = listOf("Push Ups", "Pull Ups", "Burpees", "Sit Ups", "Dips", "Chin Ups", "Squats")
+        val menuAdapter = ArrayAdapter(requireContext(), R.layout.list_item, items)
+        (binding.textField.editText as? AutoCompleteTextView)?.setAdapter(menuAdapter)
+
+        addExerciseViewModel.navigateToHomeCheck.observe(viewLifecycleOwner, Observer {
             if(it == true){
                 this.findNavController().navigate(AddExerciseFragmentDirections.actionAddExerciseFragmentToNavHome())
                 addExerciseViewModel.doneNavigating()

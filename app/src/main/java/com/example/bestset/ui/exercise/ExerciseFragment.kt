@@ -24,9 +24,10 @@ import com.google.android.material.textfield.TextInputEditText
 class ExerciseFragment : Fragment() {
 
     lateinit var sets: TextInputEditText
-    lateinit var reps : TextInputEditText
+    lateinit var reps: TextInputEditText
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
 
         val binding = FragmentExerciseBinding.inflate(inflater)
@@ -34,8 +35,9 @@ class ExerciseFragment : Fragment() {
         val application = requireNotNull(this.activity).application
         val datasource = ExerciseDatabase.getInstance(application)
 
-        val viewModelFactory = ExerciseViewModelFactory(datasource ,arguments.exerciseName)
-        val viewModel = ViewModelProviders.of(this, viewModelFactory).get(ExerciseViewModel::class.java)
+        val viewModelFactory = ExerciseViewModelFactory(datasource, arguments.exerciseName)
+        val viewModel =
+            ViewModelProviders.of(this, viewModelFactory).get(ExerciseViewModel::class.java)
         binding.viewModel = viewModel
 
         val adapter = ExerciseAdapter()
@@ -52,8 +54,9 @@ class ExerciseFragment : Fragment() {
         })
 
         viewModel.navigateHomeTrigger.observe(viewLifecycleOwner, Observer {
-            if(it == true){
-                this.findNavController().navigate(ExerciseFragmentDirections.actionExerciseFragmentToNavHome())
+            if (it == true) {
+                this.findNavController()
+                    .navigate(ExerciseFragmentDirections.actionExerciseFragmentToNavHome())
                 viewModel.navigatingDone()
             }
         })
@@ -71,13 +74,12 @@ class ExerciseFragment : Fragment() {
         val builder: AlertDialog.Builder? = activity?.let {
             AlertDialog.Builder(it)
         }
-       val dialog = builder?.setView(inflater.inflate(R.layout.set_dialog, null))
+        val dialog = builder?.setView(inflater.inflate(R.layout.set_dialog, null))
             ?.setTitle(arguments.exerciseName)?.setMessage("Add a new session here:")
-            ?.setPositiveButton("Add"){
-                dialog, which ->  recordExerciseResults(viewModel)
+            ?.setPositiveButton("Add") { dialog, which ->
+                recordExerciseResults(viewModel)
 
-            }?.
-            create()
+            }?.create()
         dialog?.show()
 
         sets = dialog!!.findViewById<TextInputEditText>(R.id.sets_edit_text)
@@ -88,11 +90,11 @@ class ExerciseFragment : Fragment() {
     private fun setupLineChart(
         binding: FragmentExerciseBinding,
         arguments: ExerciseFragmentArgs,
-        exerciseData : List<ExerciseContent>
+        exerciseData: List<ExerciseContent>
     ) {
         val entries = ArrayList<Entry>()
         var counter = 0f
-        exerciseData.forEach(){
+        exerciseData.forEach() {
             val setVol = it.exerciseVol.toFloat()
             entries.add(Entry(counter, setVol))
             counter++
@@ -109,14 +111,15 @@ class ExerciseFragment : Fragment() {
     fun recordExerciseResults(
         viewModel: ExerciseViewModel
     ) {
-        if(sets?.editableText.toString() != "" && reps?.editableText.toString() != "") {
+        if (sets?.editableText.toString() != "" && reps?.editableText.toString() != "") {
             val setInt = sets?.editableText.toString().toInt()
             val repInt = reps?.editableText.toString().toInt()
-            val volume =  repInt*setInt
+            val volume = repInt * setInt
             viewModel.volumeToBeAdded.value = volume
             viewModel.addSet()
-        }else{
-            Snackbar.make(requireView(), "Set not added: Values were blank", Snackbar.LENGTH_LONG).setBackgroundTint(Color.RED).show()
+        } else {
+            Snackbar.make(requireView(), "Set not added: Values were blank", Snackbar.LENGTH_LONG)
+                .setBackgroundTint(Color.RED).show()
         }
     }
 }
