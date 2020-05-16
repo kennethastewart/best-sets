@@ -10,9 +10,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import com.example.bestset.MainActivity
 import com.example.bestset.R
 import com.example.bestset.data.ExerciseDatabase
 import com.example.bestset.databinding.FragmentExerciseBinding
+import com.github.mikephil.charting.components.Legend
+import com.github.mikephil.charting.components.LegendEntry
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 
@@ -56,6 +59,7 @@ class ExerciseFragment : Fragment() {
             }
         })
 
+        (activity as MainActivity).supportActionBar?.title = arguments.exerciseName
         return binding.root
     }
 
@@ -87,9 +91,22 @@ class ExerciseFragment : Fragment() {
         arguments: ExerciseFragmentArgs,
         viewModel: ExerciseViewModel
     ) {
-        binding.chart.description.text = arguments.exerciseName
+        binding.chart.description.isEnabled = false
         binding.chart.description.textSize += 8
+        binding.chart.isDoubleTapToZoomEnabled = true
+        binding.chart.legend.form = Legend.LegendForm.CIRCLE
+        binding.chart.legend.formSize = 10f
+        binding.chart.legend.textSize = 16f
+        binding.chart.legend.textColor = Color.WHITE
+
         binding.chart.data = viewModel.prepareExerciseChartData()
+
+        if(binding.chart.legend.entries.size >= 1) {
+            binding.chart.legend.entries[0].label = arguments.exerciseName
+        }
+
+
+
 //        binding.chart.description.textColor = context!!.getColor(R.color.colorAccent)
         binding.chart.invalidate()
     }
