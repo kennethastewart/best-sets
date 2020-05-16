@@ -2,11 +2,9 @@ package com.example.bestset.ui.exercise
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.example.bestset.data.ExerciseContent
 import com.example.bestset.data.ExerciseDatabase
-import com.github.mikephil.charting.data.Entry
 import kotlinx.coroutines.*
 
 class ExerciseViewModel(val datasource: ExerciseDatabase, val exerciseName : String) : ViewModel(){
@@ -30,6 +28,11 @@ class ExerciseViewModel(val datasource: ExerciseDatabase, val exerciseName : Str
                 exercise.exerciseVol = it
                 insert(exercise)
             } }
+    }
+
+    fun prepareExerciseData(): List<ExerciseContent>?{
+       val modifiedExerciseData = exerciseData.value?.reversed()?.dropLast(1)
+        return modifiedExerciseData
     }
 
     private suspend fun insert(newExercise : ExerciseContent){
