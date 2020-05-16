@@ -31,9 +31,18 @@ class AddExerciseViewModel(val datasource : ExerciseDatabase , application: Appl
     fun nameNewExercise(){
         uiScope.launch {
             val exercise = ExerciseContent()
-                exercise.exercise = exerciseName.value.toString()
-                insert(exercise)
+            val exerciseNameToBeAdded = formatExerciseName(exerciseName.value)
+            exerciseNameToBeAdded?.let {
+                exercise.exercise = exerciseNameToBeAdded
+                    insert(exercise)
+            }
+
         }
+    }
+
+    fun formatExerciseName(name : String?) :String{
+        val editedName = name.toString().toLowerCase().capitalize()
+        return editedName
     }
 
     private suspend fun insert(newExercise : ExerciseContent){

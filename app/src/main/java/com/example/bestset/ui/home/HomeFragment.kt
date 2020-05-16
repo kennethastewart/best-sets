@@ -37,9 +37,14 @@ class HomeFragment : Fragment() {
         })
         binding.setLifecycleOwner(this)
 
-        homeViewModel.exerciseGroups.observe(this, Observer {
+
+        homeViewModel.exerciseGroups.observe(viewLifecycleOwner, Observer {
             it?.let {
                 adapter.exercises = it
+                binding.noExercisesAddedTest.visibility = View.GONE
+            }
+            if(it.size == 0) {
+                binding.noExercisesAddedTest.visibility = View.VISIBLE
             }
         })
         binding.exercisesRecycleview.adapter = adapter

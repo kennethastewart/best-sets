@@ -47,7 +47,7 @@ class ExerciseFragment : Fragment() {
         })
         viewModel.exerciseData.observe(viewLifecycleOwner, Observer {
             it?.let {
-                adapter.sets = it.reversed()
+                adapter.sets = it.reversed().dropLast(1)
                 setupLineChart(binding, arguments, it)
                 binding.prText.text = viewModel.getPRString()
             }
