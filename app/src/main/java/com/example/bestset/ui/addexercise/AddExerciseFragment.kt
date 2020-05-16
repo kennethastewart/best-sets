@@ -27,10 +27,7 @@ class AddExerciseFragment : Fragment() {
             inflater, R.layout.fragment_add_exercise, container, false )
         binding.viewmodel = addExerciseViewModel
         binding.setLifecycleOwner(this)
-
-        val items = listOf("Push Ups", "Pull Ups", "Burpees", "Sit Ups", "Dips", "Chin Ups", "Squats")
-        val menuAdapter = ArrayAdapter(requireContext(), R.layout.list_item, items)
-        (binding.textField.editText as? AutoCompleteTextView)?.setAdapter(menuAdapter)
+        prepareAutoCompleteTextBox(binding)
 
         addExerciseViewModel.navigateToHomeCheck.observe(viewLifecycleOwner, Observer {
             if(it == true){
@@ -40,5 +37,11 @@ class AddExerciseFragment : Fragment() {
         })
 
         return binding.root
+    }
+
+    fun prepareAutoCompleteTextBox(binding: FragmentAddExerciseBinding) {
+        val items = listOf("Push Ups", "Pull Ups", "Burpees", "Sit Ups", "Dips", "Chin Ups", "Squats")
+        val menuAdapter = ArrayAdapter(requireContext(), R.layout.list_item, items)
+        (binding.textField.editText as? AutoCompleteTextView)?.setAdapter(menuAdapter)
     }
 }
