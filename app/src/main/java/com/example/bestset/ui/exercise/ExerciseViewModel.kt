@@ -5,6 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.bestset.data.ExerciseContent
 import com.example.bestset.data.ExerciseDatabase
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
 import kotlinx.coroutines.*
 
 class ExerciseViewModel(val datasource: ExerciseDatabase, val exerciseName : String) : ViewModel(){
@@ -77,6 +80,19 @@ class ExerciseViewModel(val datasource: ExerciseDatabase, val exerciseName : Str
     fun getPRString() : String{
         val pr = getPR()
         return "Personal Best: $pr reps"
+    }
+
+    fun prepareExerciseChartData() : LineData{
+        val entries = ArrayList<Entry>()
+        var counter = 0f
+        exerciseData.value?.forEach() {
+            val setVol = it.exerciseVol.toFloat()
+            entries.add(Entry(counter, setVol))
+            counter++
+        }
+        val dataSet = LineDataSet(entries, "Test")
+        val lineData = LineData(dataSet)
+        return lineData
     }
 
 

@@ -11,12 +11,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.example.bestset.R
-import com.example.bestset.data.ExerciseContent
 import com.example.bestset.data.ExerciseDatabase
 import com.example.bestset.databinding.FragmentExerciseBinding
-import com.github.mikephil.charting.data.Entry
-import com.github.mikephil.charting.data.LineData
-import com.github.mikephil.charting.data.LineDataSet
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 
@@ -29,7 +25,6 @@ class ExerciseFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-
         val binding = FragmentExerciseBinding.inflate(inflater)
         val arguments = ExerciseFragmentArgs.fromBundle(requireArguments())
         val application = requireNotNull(this.activity).application
@@ -48,7 +43,7 @@ class ExerciseFragment : Fragment() {
         viewModel.exerciseData.observe(viewLifecycleOwner, Observer {
             it?.let {
                 adapter.sets = viewModel.prepareExerciseData()
-                setupLineChart(binding, arguments, it)
+                setupLineChart(binding, arguments, viewModel)
                 binding.prText.text = viewModel.getPRString()
             }
         })
@@ -90,20 +85,11 @@ class ExerciseFragment : Fragment() {
     private fun setupLineChart(
         binding: FragmentExerciseBinding,
         arguments: ExerciseFragmentArgs,
-        exerciseData: List<ExerciseContent>
+        viewModel: ExerciseViewModel
     ) {
-        val entries = ArrayList<Entry>()
-        var counter = 0f
-        exerciseData.forEach() {
-            val setVol = it.exerciseVol.toFloat()
-            entries.add(Entry(counter, setVol))
-            counter++
-        }
-        val dataSet = LineDataSet(entries, "Test")
-        val lineData = LineData(dataSet)
         binding.chart.description.text = arguments.exerciseName
         binding.chart.description.textSize += 8
-        binding.chart.data = lineData
+        binding.chart.data = viewModel.prepareExerciseChartData()
 //        binding.chart.description.textColor = context!!.getColor(R.color.colorAccent)
         binding.chart.invalidate()
     }
@@ -111,9 +97,9 @@ class ExerciseFragment : Fragment() {
     fun recordExerciseResults(
         viewModel: ExerciseViewModel
     ) {
-        if (sets?.editableText.toString() != "" && reps?.editableText.toString() != "") {
-            val setInt = sets?.editableText.toString().toInt()
-            val repInt = reps?.editableText.toString().toInt()
+        if (sets.editableText.toString() != "" && reps.editableText.toString() != "") {
+            val setInt = sets.editableText.toString().toInt()
+            val repInt = reps.editableText.toString().toInt()
             val volume = repInt * setInt
             viewModel.volumeToBeAdded.value = volume
             viewModel.addSet()
