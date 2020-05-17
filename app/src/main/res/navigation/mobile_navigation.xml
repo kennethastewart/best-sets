@@ -16,6 +16,7 @@
         <action
             android:id="@+id/action_nav_home_to_exerciseFragment"
             app:destination="@id/exerciseFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/exerciseFragment"
@@ -41,5 +42,10 @@
             android:id="@+id/action_addExerciseFragment_to_nav_home"
             app:destination="@id/nav_home" />
     </fragment>
+    <fragment
+        android:id="@+id/nav_weight"
+        android:name="com.example.bestset.ui.records.RecordWeightFragment"
+        android:label="@string/record_weight_label"
+        tools:layout="@layout/fragment_record_weight"/>
 
 </navigation>
