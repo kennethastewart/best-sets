@@ -15,7 +15,7 @@
             app:destination="@id/addExerciseFragment" />
         <action
             android:id="@+id/action_nav_home_to_exerciseFragment"
-            app:destination="@id/exerciseFragment" />
+            app:destination="@id/exerciseFragment"/>
 
     </fragment>
     <fragment

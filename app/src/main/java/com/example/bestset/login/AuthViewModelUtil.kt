@@ -11,6 +11,18 @@ class AuthViewModelUtil : ViewModel() {
 
     val _authenticationState = FirebaseUserLiveData()
 
+    val userName = Transformations.map(_authenticationState){user ->
+        if(user != null){
+            user.displayName
+        }else{
+            "Default User"
+        }
+    }
+
+    fun getUserName() : String{
+        return userName.value.toString()
+    }
+
     val authenticationState = Transformations.map(_authenticationState){ user ->
         if (user != null) {
             AuthenticationState.AUTHENTICATED
@@ -18,4 +30,9 @@ class AuthViewModelUtil : ViewModel() {
             AuthenticationState.UNAUTHENTICATED
         }
     }
+
+
+
+
 }
+
