@@ -78,6 +78,7 @@ class ExerciseFragment : Fragment() {
             ?.setPositiveButton("Add") { dialog, which ->
                 recordExerciseResults(viewModel)
 
+
             }?.create()
         dialog?.show()
 
