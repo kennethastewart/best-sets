@@ -30,7 +30,8 @@ class RecordWeightViewModel(val datasource: WeightDatabase) : ViewModel(){
     fun prepareWeightChartData() : LineData {
         val entries = ArrayList<Entry>()
         var counter = 0f
-        allWeightData.value?.forEach {
+
+        allWeightData.value?.reversed()?.forEach {
             val weight = it.userWeight
             entries.add(Entry(counter, weight))
             counter++

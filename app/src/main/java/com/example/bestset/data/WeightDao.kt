@@ -18,7 +18,7 @@ interface WeightDao{
     @Query("DELETE FROM user_weight_records WHERE id = :id")
     fun deleteEntry(id : String)
 
-    @Query("SELECT * FROM user_weight_records WHERE user_name = :userName")
+    @Query("SELECT * FROM user_weight_records  WHERE user_name = :userName ORDER BY date DESC;"  )
     fun getUserWeighRecords(userName : String) : LiveData<List<UserWeight>>
 
 }

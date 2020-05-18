@@ -20,4 +20,5 @@
     <string name="record_weight_label">record_weight_fragment</string>
 
     <string name="dialog_submit">Submit</string>
+    <string name="add_current_weight">Add Current Weight</string>
 </resources>
