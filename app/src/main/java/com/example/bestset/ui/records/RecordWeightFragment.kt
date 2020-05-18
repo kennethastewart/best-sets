@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.get
+import com.example.bestset.data.WeightDatabase
 import com.example.bestset.databinding.FragmentRecordWeightBinding
 import com.example.bestset.ui.sharedutils.InputDialogs
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 
 class RecordWeightFragment : Fragment(){
     override fun onCreateView(
@@ -17,13 +17,17 @@ class RecordWeightFragment : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-
         val binding = FragmentRecordWeightBinding.inflate(inflater)
-        val application = requireNotNull(this.activity).application
-        binding.recordWeightButton.setOnClickListener({
+        val application = requireNotNull(requireActivity()).application
+        val datasource = WeightDatabase.getInstance(application)
 
-            InputDialogs().show(requireFragmentManager(), "input")
+        val viewModel by lazy{
+            val factory = RecordWeightViewModelFactory(datasource)
+            ViewModelProviders.of(this, factory).get<RecordWeightViewModel>()
+        }
+
+        binding.recordWeightButton.setOnClickListener({
+            InputDialogs(viewModel).show(requireFragmentManager(),"record weight")
         })
 
 
