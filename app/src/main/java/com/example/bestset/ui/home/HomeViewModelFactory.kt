@@ -7,14 +7,13 @@ import com.example.bestset.data.ExerciseDatabase
 import com.example.bestset.ui.addexercise.AddExerciseViewModel
 
 class HomeViewModelFactory (
-    val dataSource: ExerciseDatabase,
-    val application: Application
+    val dataSource: ExerciseDatabase
     ) : ViewModelProvider.Factory {
 
         @Suppress("unchecked_cast")
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(HomeViewModel::class.java)) {
-                return HomeViewModel(dataSource, application) as T
+                return HomeViewModel(dataSource) as T
             }
             throw IllegalArgumentException("Unknown ViewModel class")
         }

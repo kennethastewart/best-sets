@@ -31,4 +31,5 @@ class RecordWeightViewModel(val datasource: WeightDatabase) : ViewModel(){
             datasource.userweightDao.insert(weightEntry)
         }
     }
+
 }

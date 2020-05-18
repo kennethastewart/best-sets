@@ -12,12 +12,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 
-class HomeViewModel(val datasource : ExerciseDatabase, val application : Application) : ViewModel() {
-
-
-    private var viewModelJob = Job()
-    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-
+class HomeViewModel(val datasource : ExerciseDatabase) : ViewModel() {
     val allExerciseData = datasource.exerciseDatabaseDao.getAllExerciseData()
     val exerciseGroups = groupExercisesByName(allExerciseData)
 

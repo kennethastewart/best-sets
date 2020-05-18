@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.get
 import com.example.bestset.data.WeightDatabase
 import com.example.bestset.databinding.FragmentRecordWeightBinding
-import com.example.bestset.ui.sharedutils.InputDialogs
 
 class RecordWeightFragment : Fragment(){
     override fun onCreateView(
@@ -27,11 +26,12 @@ class RecordWeightFragment : Fragment(){
         }
 
         binding.recordWeightButton.setOnClickListener({
-            InputDialogs(viewModel).show(requireFragmentManager(),"record weight")
+            InputDialogs(viewModel)
+                .show(requireFragmentManager(),"record weight")
         })
-
-
 
         return binding.root
     }
+
+
 }

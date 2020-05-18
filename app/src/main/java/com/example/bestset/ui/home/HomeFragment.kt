@@ -13,10 +13,7 @@ import com.example.bestset.databinding.FragmentHomeBinding
 import com.firebase.ui.auth.AuthUI
 
 class HomeFragment : Fragment() {
-
     private lateinit var homeViewModel: HomeViewModel
-
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? ): View? {
 
         val binding : FragmentHomeBinding = DataBindingUtil.inflate(
@@ -25,7 +22,7 @@ class HomeFragment : Fragment() {
         val application = requireNotNull(this.activity).application
         val datasource = ExerciseDatabase.getInstance(application)
 
-        val viewModelFactory = HomeViewModelFactory(datasource, application)
+        val viewModelFactory = HomeViewModelFactory(datasource)
         homeViewModel =
             ViewModelProviders.of(this, viewModelFactory).get(HomeViewModel::class.java)
         binding.viewmodel = homeViewModel
@@ -36,7 +33,6 @@ class HomeFragment : Fragment() {
             this.findNavController().navigate(HomeFragmentDirections.actionNavHomeToExerciseFragment(it))
         })
         binding.setLifecycleOwner(this)
-
 
         homeViewModel.exerciseGroups.observe(viewLifecycleOwner, Observer {
             it?.let {
