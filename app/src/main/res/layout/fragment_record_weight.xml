@@ -11,9 +11,11 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryExtraDark">
 
     <RelativeLayout
+
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,10 +34,12 @@
         android:id="@+id/record_weight_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add Current Weight"
+        android:text="@string/add_current_weight"
         android:backgroundTint="@color/colorPrimaryExtraDark"
         android:background="@color/colorPrimaryExtraDark"
+        android:drawableTop="@drawable/no_corners"
         android:insetTop="0dp"
+        style="?android:attr/borderlessButtonStyle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
@@ -52,16 +56,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/weight_recycler"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="8dp"
-            android:paddingStart="0dp"
-            android:paddingLeft="0dp"
-            android:paddingEnd="0dp"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/add_set_button" />
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"/>
 
 
     </LinearLayout>

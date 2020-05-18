@@ -8,6 +8,10 @@
             name="userWeight"
             type="com.example.bestset.data.UserWeight" />
     </data>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
 
     <LinearLayout
         android:orientation="horizontal"
@@ -21,6 +25,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             />
+    </LinearLayout>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="@color/primaryLighterColor" />
 
 
     </LinearLayout>

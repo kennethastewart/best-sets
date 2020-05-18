@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.get
+import com.example.bestset.MainActivity
 import com.example.bestset.data.WeightDatabase
 import com.example.bestset.databinding.FragmentRecordWeightBinding
 import com.example.bestset.ui.records.dialog.InputDialogs
@@ -40,6 +41,7 @@ class RecordWeightFragment : Fragment(){
             prepareWeightChart(binding,  viewModel.prepareWeightChartData())
         })
         binding.weightRecycler.adapter = adapter
+        (activity as MainActivity).supportActionBar?.title = "Body Weight"
 
 
         return binding.root
