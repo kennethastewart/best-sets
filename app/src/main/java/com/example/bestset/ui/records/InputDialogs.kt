@@ -24,7 +24,7 @@ class InputDialogs(val viewModel: RecordWeightViewModel) : DialogFragment() {
         }
 
 
-        return super.onCreateDialog(savedInstanceState)
+        return dialog
     }
 
     override fun onStop() {
