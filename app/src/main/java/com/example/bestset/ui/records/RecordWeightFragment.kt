@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.get
 import com.example.bestset.data.WeightDatabase
 import com.example.bestset.databinding.FragmentRecordWeightBinding
+import com.github.mikephil.charting.data.LineData
 
 class RecordWeightFragment : Fragment(){
     override fun onCreateView(
@@ -35,11 +36,20 @@ class RecordWeightFragment : Fragment(){
         })
 
         viewModel.allWeightData.observe(viewLifecycleOwner, Observer {
-                adapter.submitList(it)
+            adapter.submitList(it)
+            prepareWeightChart(binding,  viewModel.prepareWeightChartData())
         })
         binding.weightRecycler.adapter = adapter
 
+
         return binding.root
+    }
+
+    private fun prepareWeightChart(binding: FragmentRecordWeightBinding, weightChartData: LineData) {
+        binding.weightChart.description.isEnabled = false
+        binding.weightChart.data = weightChartData
+        binding.weightChart.invalidate()
+
     }
 
 

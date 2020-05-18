@@ -7,6 +7,9 @@ import com.example.bestset.data.UserWeight
 import com.example.bestset.data.WeightDatabase
 import com.example.bestset.login.AuthViewModelUtil
 import com.firebase.ui.auth.data.model.User
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.*
 
@@ -45,5 +48,19 @@ class RecordWeightViewModel(val datasource: WeightDatabase) : ViewModel(){
             datasource.userweightDao.insert(weightEntry)
         }
     }
+
+    fun prepareWeightChartData() : LineData {
+        val entries = ArrayList<Entry>()
+        var counter = 0f
+        allWeightData.value?.forEach {
+            val weight = it.userWeight
+            entries.add(Entry(counter, weight))
+            counter++
+        }
+        val dataSet = LineDataSet(entries, "Test")
+        val lineData = LineData(dataSet)
+        return lineData
+    }
+
 
 }

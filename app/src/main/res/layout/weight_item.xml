@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:padding="@dimen/medium_spacing"
-        android:background="@color/primaryLightColor">
+        android:background="@color/white">
 
         <TextView
             android:id="@+id/recorded_weight"

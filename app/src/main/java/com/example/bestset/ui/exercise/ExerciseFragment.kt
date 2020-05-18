@@ -93,7 +93,6 @@ class ExerciseFragment : Fragment() {
         viewModel: ExerciseViewModel
     ) {
         binding.chart.description.isEnabled = false
-        binding.chart.description.textSize += 8
         binding.chart.isDoubleTapToZoomEnabled = true
         binding.chart.legend.form = Legend.LegendForm.CIRCLE
         binding.chart.legend.formSize = 10f
