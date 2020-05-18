@@ -1,6 +1,5 @@
 package com.example.bestset
 
-import android.content.Context
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -15,14 +14,14 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
-import com.example.bestset.login.AuthViewModelUtil
+import com.example.bestset.login.AuthViewModel
 import com.firebase.ui.auth.AuthUI
 import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
-    private val viewModel by viewModels<AuthViewModelUtil>()
+    private val viewModel by viewModels<AuthViewModel>()
     private var authStateFlag = false
 
     companion object {
@@ -46,9 +45,9 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
         viewModel.authenticationState.observe(this, Observer { authenticationState ->
-            if (authenticationState == AuthViewModelUtil.AuthenticationState.UNAUTHENTICATED){
+            if (authenticationState == AuthViewModel.AuthenticationState.UNAUTHENTICATED){
                authStateFlag = false
-            }else if(authenticationState == AuthViewModelUtil.AuthenticationState.AUTHENTICATED){
+            }else if(authenticationState == AuthViewModel.AuthenticationState.AUTHENTICATED){
                 authStateFlag = true
             }
         })

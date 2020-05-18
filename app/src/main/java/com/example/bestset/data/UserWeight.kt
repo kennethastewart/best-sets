@@ -3,7 +3,6 @@ package com.example.bestset.data
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.bestset.login.AuthViewModelUtil
 import java.util.*
 
 @Entity(tableName = "user_weight_records")

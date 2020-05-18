@@ -1,7 +1,6 @@
 package com.example.bestset.ui.records
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.get
 import com.example.bestset.data.WeightDatabase
 import com.example.bestset.databinding.FragmentRecordWeightBinding
+import com.example.bestset.ui.records.dialog.InputDialogs
 import com.github.mikephil.charting.data.LineData
 
 class RecordWeightFragment : Fragment(){
@@ -31,7 +31,7 @@ class RecordWeightFragment : Fragment(){
 
 
         binding.recordWeightButton.setOnClickListener({
-            InputDialogs(viewModel)
+            InputDialogs()
                 .show(requireFragmentManager(),"record weight")
         })
 
