@@ -1,6 +1,5 @@
 package com.example.bestset.ui.exercise
 
-import android.app.AlertDialog
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,9 +13,8 @@ import com.example.bestset.MainActivity
 import com.example.bestset.R
 import com.example.bestset.data.ExerciseDatabase
 import com.example.bestset.databinding.FragmentExerciseBinding
+import com.example.bestset.ui.exercise.setdialog.AddSetDialog
 import com.github.mikephil.charting.components.Legend
-import com.github.mikephil.charting.components.LegendEntry
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 
 
@@ -41,7 +39,12 @@ class ExerciseFragment : Fragment() {
         val adapter = ExerciseAdapter()
         binding.setsRecycler.adapter = adapter
         binding.addSetButton.setOnClickListener(View.OnClickListener {
-            openAddSetDialog(inflater, arguments, viewModel)
+            val exerciseNameBundle = Bundle()
+            exerciseNameBundle.putString(getString(R.string.add_set_dialog_key), arguments.exerciseName)
+            val addSetDialog = AddSetDialog()
+            addSetDialog.setArguments(exerciseNameBundle)
+            addSetDialog.show(requireFragmentManager(), "Set Dialog")
+
         })
         viewModel.exerciseData.observe(viewLifecycleOwner, Observer {
             it?.let {
@@ -63,30 +66,6 @@ class ExerciseFragment : Fragment() {
         return binding.root
     }
 
-    private fun openAddSetDialog(
-        inflater: LayoutInflater,
-        arguments: ExerciseFragmentArgs,
-        viewModel: ExerciseViewModel
-    ) {
-
-
-        val builder: AlertDialog.Builder? = activity?.let {
-            AlertDialog.Builder(it)
-        }
-        val dialog = builder?.setView(inflater.inflate(R.layout.set_dialog, null))
-            ?.setTitle(arguments.exerciseName)?.setMessage("Add a new session here:")
-            ?.setPositiveButton("Add") { dialog, which ->
-                recordExerciseResults(viewModel)
-
-
-            }?.create()
-        dialog?.show()
-
-        sets = dialog!!.findViewById<TextInputEditText>(R.id.sets_edit_text)
-        reps = dialog!!.findViewById<TextInputEditText>(R.id.reps_edit_text)
-
-    }
-
     private fun setupLineChart(
         binding: FragmentExerciseBinding,
         arguments: ExerciseFragmentArgs,
@@ -104,26 +83,7 @@ class ExerciseFragment : Fragment() {
         if(binding.chart.legend.entries.size >= 1) {
             binding.chart.legend.entries[0].label = arguments.exerciseName
         }
-
-
-
-//        binding.chart.description.textColor = context!!.getColor(R.color.colorAccent)
         binding.chart.invalidate()
-    }
-
-    fun recordExerciseResults(
-        viewModel: ExerciseViewModel
-    ) {
-        if (sets.editableText.toString() != "" && reps.editableText.toString() != "") {
-            val setInt = sets.editableText.toString().toInt()
-            val repInt = reps.editableText.toString().toInt()
-            val volume = repInt * setInt
-            viewModel.volumeToBeAdded.value = volume
-            viewModel.addSet()
-        } else {
-            Snackbar.make(requireView(), "Set not added: Values were blank", Snackbar.LENGTH_LONG)
-                .setBackgroundTint(Color.RED).show()
-        }
     }
 }
 

@@ -16,33 +16,20 @@ class ExerciseViewModel(val datasource: ExerciseDatabase, val exerciseName : Str
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     var exerciseData: LiveData<List<ExerciseContent>>
-    var volumeToBeAdded = MutableLiveData<Int>()
 
     val _navigateHomeTrigger = MutableLiveData<Boolean>()
 
     val navigateHomeTrigger: LiveData<Boolean>
         get() = _navigateHomeTrigger
 
-    fun addSet(){
-        uiScope.launch {
-            val exercise = ExerciseContent()
-            exercise.exercise = exerciseName
-            volumeToBeAdded.value?.let {
-                exercise.exerciseVol = it
-                insert(exercise)
-            } }
-    }
+
 
     fun prepareExerciseData(): List<ExerciseContent>?{
        val modifiedExerciseData = exerciseData.value?.reversed()?.dropLast(1)
         return modifiedExerciseData
     }
 
-    private suspend fun insert(newExercise : ExerciseContent){
-        return withContext(Dispatchers.IO){
-            datasource.exerciseDatabaseDao.insert(newExercise)
-        }
-    }
+
 
     fun deleteExerciseAndTriggerNavigateHome(){
         removeSet()
