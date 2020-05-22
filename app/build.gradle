@@ -29,6 +29,11 @@ android {
         }
     }
 
+    testOptions.unitTests {
+        includeAndroidResources = true
+        returnDefaultValues = true
+    }
+
     repositories {
         maven {
             url "https://www.jitpack.io"
@@ -77,6 +82,11 @@ dependencies {
     implementation "androidx.test:core:$androidXTestCoreVersion"
     testImplementation 'junit:junit:4.12'
     testImplementation "org.hamcrest:hamcrest-all:$hamcrestVersion"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
+
+
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     androidTestImplementation "androidx.arch.core:core-testing:$archTestingVersion"

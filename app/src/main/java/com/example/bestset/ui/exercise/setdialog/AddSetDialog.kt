@@ -4,7 +4,6 @@ import android.app.Dialog
 import android.graphics.Color
 import android.os.Bundle
 import android.widget.EditText
-import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.get

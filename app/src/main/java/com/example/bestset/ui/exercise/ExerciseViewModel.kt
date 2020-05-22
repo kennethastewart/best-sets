@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.bestset.data.ExerciseContent
+import com.example.bestset.data.ExerciseDao
 import com.example.bestset.data.ExerciseDatabase
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
