@@ -11,5 +11,9 @@
         <item
             android:id="@+id/nav_weight"
             android:title="@string/menu_weight" />
+
+        <item
+            android:id="@+id/nav_settings"
+            android:title="@string/action_settings" />
     </group>
 </menu>

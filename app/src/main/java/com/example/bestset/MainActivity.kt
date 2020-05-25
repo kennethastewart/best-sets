@@ -1,22 +1,25 @@
 package com.example.bestset
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
-import com.google.android.material.navigation.NavigationView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import androidx.lifecycle.Observer
 import com.example.bestset.login.AuthViewModel
+import com.example.bestset.ui.settings.SettingsFragment
 import com.firebase.ui.auth.AuthUI
+import com.google.android.material.navigation.NavigationView
 import timber.log.Timber
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -35,13 +38,14 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         Timber.plant(Timber.DebugTree())
 
+
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(setOf(
-                R.id.nav_home, R.id.nav_weight), drawerLayout)
+                R.id.nav_home, R.id.nav_weight, R.id.nav_settings), drawerLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
         viewModel.authenticationState.observe(this, Observer { authenticationState ->
@@ -77,6 +81,7 @@ class MainActivity : AppCompatActivity() {
         when(id){
             R.id.log_in -> startSignInFlow()
             R.id.log_out -> signOut()
+//            R.id.action_settings -> navigateToSettings()
         }
         return super.onOptionsItemSelected(item)
     }

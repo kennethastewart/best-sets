@@ -22,5 +22,6 @@
     <string name="dialog_submit">保存</string>
     <string name="add_set_dialog_key">EXERCISE_NAME</string>
     <string name="add_current_weight">记录体重</string>
+    <string name="switch_text">语言</string>
 
 </resources>

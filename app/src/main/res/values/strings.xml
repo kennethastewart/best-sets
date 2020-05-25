@@ -21,4 +21,5 @@
     <string name="dialog_submit">Submit</string>
     <string name="add_set_dialog_key">EXERCISE_NAME</string>
     <string name="add_current_weight">Add Current Weight</string>
+    <string name="switch_text">Language</string>
 </resources>
