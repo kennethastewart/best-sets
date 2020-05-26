@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.bestset.BaseActivity
 import com.example.bestset.R
 import com.example.bestset.databinding.FragmentSettingsBinding
+import java.util.*
 
 
 class SettingsFragment : Fragment(){
@@ -18,8 +20,10 @@ class SettingsFragment : Fragment(){
     ): View? {
 
         val binding = FragmentSettingsBinding.inflate(inflater)
+
+
+
+
         return binding.root
-
-
     }
 }

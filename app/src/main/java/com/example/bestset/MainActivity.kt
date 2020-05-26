@@ -1,11 +1,9 @@
 package com.example.bestset
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
@@ -15,17 +13,18 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.bestset.login.AuthViewModel
-import com.example.bestset.ui.settings.SettingsFragment
 import com.firebase.ui.auth.AuthUI
 import com.google.android.material.navigation.NavigationView
 import timber.log.Timber
+import java.util.*
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private val viewModel by viewModels<AuthViewModel>()
     private var authStateFlag = false
+    lateinit var currentLocale : Locale
 
     companion object {
         const val TAG = "MainActivity"
@@ -37,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         Timber.plant(Timber.DebugTree())
-
+        currentLocale = getResources().getConfiguration().locale;
 
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
@@ -67,12 +66,23 @@ class MainActivity : AppCompatActivity() {
             signInOption.setVisible(true)
             signOutOption.setVisible(false)
         }
+        val englishMenuItem = menu.findItem(R.id.switch_to_english)
+        val chineseMenuItem = menu.findItem(R.id.switch_to_chinese)
+        if (currentLocale == Locale.CHINESE) {
+            englishMenuItem.setVisible(true)
+            chineseMenuItem.setVisible(false)
+        }else if(currentLocale == Locale.ENGLISH){
+            englishMenuItem.setVisible(false)
+            chineseMenuItem.setVisible(true)
+        }
+
         return super.onPrepareOptionsMenu(menu)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
+
         return true
     }
 
@@ -82,6 +92,8 @@ class MainActivity : AppCompatActivity() {
             R.id.log_in -> startSignInFlow()
             R.id.log_out -> signOut()
 //            R.id.action_settings -> navigateToSettings()
+            R.id.switch_to_chinese -> updateLocale(Locale.CHINESE)
+            R.id.switch_to_english -> updateLocale(Locale.ENGLISH)
         }
         return super.onOptionsItemSelected(item)
     }
@@ -91,7 +103,6 @@ class MainActivity : AppCompatActivity() {
         val providers = arrayListOf(
             AuthUI.IdpConfig.EmailBuilder().build(), AuthUI.IdpConfig.GoogleBuilder().build()
         )
-
         startActivityForResult(
             AuthUI.getInstance()
                 .createSignInIntentBuilder()
@@ -103,6 +114,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun signOut(){
         AuthUI.getInstance().signOut(applicationContext)
+    }
+
+    override fun updateLocale(locale: Locale) {
+        super.updateLocale(locale)
     }
 
     override fun onSupportNavigateUp(): Boolean {

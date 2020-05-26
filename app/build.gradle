@@ -78,6 +78,7 @@ dependencies {
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
     implementation 'com.firebaseui:firebase-ui-auth:5.0.0'
     implementation 'com.afollestad.material-dialogs:input:3.3.0'
+    implementation 'com.zeugmasolutions.localehelper:locale-helper-android:1.0.3'
 
     implementation "androidx.test:core:$androidXTestCoreVersion"
     testImplementation 'junit:junit:4.12'

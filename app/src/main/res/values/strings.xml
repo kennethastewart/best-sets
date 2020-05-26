@@ -22,4 +22,6 @@
     <string name="add_set_dialog_key">EXERCISE_NAME</string>
     <string name="add_current_weight">Add Current Weight</string>
     <string name="switch_text">Language</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="sign_in">Sign In</string>
 </resources>

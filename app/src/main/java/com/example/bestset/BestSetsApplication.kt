@@ -1,17 +1,14 @@
 package com.example.bestset
 
-import android.app.Application
-import android.content.res.Configuration
-import android.content.res.Resources
-import android.preference.PreferenceManager
-import android.util.Log
+import com.zeugmasolutions.localehelper.LocaleAwareApplication
 import java.util.*
 
-class BestSetsApplication : Application() {
+class BestSetsApplication : LocaleAwareApplication() {
 
     override fun onCreate() {
-
-
         super.onCreate()
     }
 }
+
+
+

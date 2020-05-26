@@ -23,5 +23,7 @@
     <string name="add_set_dialog_key">EXERCISE_NAME</string>
     <string name="add_current_weight">记录体重</string>
     <string name="switch_text">语言</string>
+    <string name="sign_out">退出登录</string>
+    <string name="sign_in">登入</string>
 
 </resources>
