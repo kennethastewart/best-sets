@@ -2,10 +2,10 @@ package com.example.bestset.ui.records
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.bestset.data.WeightDatabase
+import com.example.bestset.data.ExerciseDatabase
 
 class RecordWeightViewModelFactory(
-    val datasource : WeightDatabase
+    val datasource : ExerciseDatabase
 ) :  ViewModelProvider.Factory{
 
     @Suppress("unchecked_cast")

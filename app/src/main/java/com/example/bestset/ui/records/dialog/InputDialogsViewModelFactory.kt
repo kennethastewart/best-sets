@@ -2,9 +2,9 @@ package com.example.bestset.ui.records.dialog
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.bestset.data.WeightDatabase
+import com.example.bestset.data.ExerciseDatabase
 
-class InputDialogsViewModelFactory(val datasource : WeightDatabase) : ViewModelProvider.Factory{
+class InputDialogsViewModelFactory(val datasource : ExerciseDatabase) : ViewModelProvider.Factory{
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(InputDialogsViewModel::class.java)) {
