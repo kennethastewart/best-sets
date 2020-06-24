@@ -10,9 +10,6 @@ import com.google.firebase.auth.FirebaseAuth
 
 class RecordWeightViewModel(val datasource: ExerciseDatabase) : ViewModel(){
 
-
-
-
     val username = AuthUtil.getCurrentUsername()
     val allWeightData = datasource.userweightDao.getUserWeighRecords(username)
 
