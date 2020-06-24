@@ -7,7 +7,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bestset.R
 import com.example.bestset.data.ExerciseContent
-import com.example.bestset.ui.home.HomeExerciseAdapter
 
 class ExerciseAdapter() : RecyclerView.Adapter<ExerciseAdapter.SetViewHolder>() {
     private var setData : List<ExerciseContent>? = null

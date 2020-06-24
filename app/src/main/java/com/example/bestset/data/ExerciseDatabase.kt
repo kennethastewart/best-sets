@@ -5,16 +5,17 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [ExerciseContent::class], version = 3, exportSchema = false)
+@Database(entities = [ExerciseContent::class, UserWeight::class], version = 4, exportSchema = false)
 abstract class ExerciseDatabase : RoomDatabase(){
 
     abstract val exerciseDatabaseDao : ExerciseDao
+    abstract val userweightDao : WeightDao
 
     companion object{
 
         @Volatile
         private var INSTANCE: ExerciseDatabase? = null
-        val TABLE_NAME = "exercise_history_database"
+        val DB_NAME = "exercise_history_database"
 
         fun getInstance(context : Context) : ExerciseDatabase{
             synchronized(this){
@@ -24,7 +25,7 @@ abstract class ExerciseDatabase : RoomDatabase(){
                     instance = Room.databaseBuilder(
                         context.applicationContext,
                         ExerciseDatabase::class.java,
-                        TABLE_NAME
+                        DB_NAME
                     )
                         .fallbackToDestructiveMigration()
                         .build()

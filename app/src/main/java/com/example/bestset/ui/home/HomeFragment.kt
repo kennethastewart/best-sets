@@ -43,6 +43,7 @@ class HomeFragment : Fragment() {
                 binding.noExercisesAddedTest.visibility = View.VISIBLE
             }
         })
+
         binding.exercisesRecycleview.adapter = adapter
         return binding.root
     }

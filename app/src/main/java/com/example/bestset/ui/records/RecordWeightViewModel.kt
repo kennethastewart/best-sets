@@ -1,14 +1,14 @@
 package com.example.bestset.ui.records
 
 import androidx.lifecycle.ViewModel
-import com.example.bestset.data.WeightDatabase
+import com.example.bestset.data.ExerciseDatabase
 import com.example.bestset.login.AuthUtil
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.google.firebase.auth.FirebaseAuth
 
-class RecordWeightViewModel(val datasource: WeightDatabase) : ViewModel(){
+class RecordWeightViewModel(val datasource: ExerciseDatabase) : ViewModel(){
 
 
 

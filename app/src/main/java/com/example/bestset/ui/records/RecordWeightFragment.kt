@@ -9,7 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.get
 import com.example.bestset.MainActivity
-import com.example.bestset.data.WeightDatabase
+import com.example.bestset.data.ExerciseDatabase
 import com.example.bestset.databinding.FragmentRecordWeightBinding
 import com.example.bestset.ui.records.dialog.InputDialogs
 import com.github.mikephil.charting.data.LineData
@@ -22,7 +22,7 @@ class RecordWeightFragment : Fragment(){
     ): View? {
         val binding = FragmentRecordWeightBinding.inflate(inflater)
         val application = requireNotNull(requireActivity()).application
-        val datasource = WeightDatabase.getInstance(application)
+        val datasource = ExerciseDatabase.getInstance(application)
 
         val viewModel by lazy{
             val factory = RecordWeightViewModelFactory(datasource)

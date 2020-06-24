@@ -9,9 +9,7 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.input.getInputField
 import com.afollestad.materialdialogs.input.input
 import com.example.bestset.R
-import com.example.bestset.data.WeightDatabase
-import com.example.bestset.ui.records.RecordWeightViewModel
-import com.example.bestset.ui.records.RecordWeightViewModelFactory
+import com.example.bestset.data.ExerciseDatabase
 
 class InputDialogs() : DialogFragment() {
     lateinit var dialog: MaterialDialog
@@ -19,7 +17,7 @@ class InputDialogs() : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
         val application = requireNotNull(requireActivity()).application
-        val datasource = WeightDatabase.getInstance(application)
+        val datasource = ExerciseDatabase.getInstance(application)
 
         val viewModel by lazy {
             val factory =

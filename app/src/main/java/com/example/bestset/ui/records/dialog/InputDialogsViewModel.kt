@@ -2,12 +2,12 @@ package com.example.bestset.ui.records.dialog
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.bestset.data.ExerciseDatabase
 import com.example.bestset.data.UserWeight
-import com.example.bestset.data.WeightDatabase
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.*
 
-class InputDialogsViewModel(val datasource: WeightDatabase) : ViewModel(){
+class InputDialogsViewModel(val datasource: ExerciseDatabase) : ViewModel(){
 
 
     var viewModelJob = Job()
